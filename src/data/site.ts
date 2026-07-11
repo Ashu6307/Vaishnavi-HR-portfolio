@@ -6,7 +6,9 @@ export const siteConfig: SiteConfig = {
   title: "Vaishnavi Jaiswal | Human Resources Executive",
   description:
     "Professional portfolio of Vaishnavi Jaiswal, a Human Resources Executive experienced in Non-IT recruitment, Talent Acquisition, onboarding, recruitment operations, and HR support.",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://vaishnavi-hr-portfolio.pages.dev",
   footerText: "All rights reserved.",
   contact: {
     email: "vaishnavi.jaiswal@pciinfra.in",
