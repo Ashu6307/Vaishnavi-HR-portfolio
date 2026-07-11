@@ -22,11 +22,22 @@ npm install
 npm run dev
 npm run lint
 npm run typecheck
+npm run test:e2e
 npm run build
 npm run preview
 ```
 
 The production static output is generated in `out/`.
+
+## Development QA
+
+The branded loader appears on every full document load and hard refresh for at least one second. In development, append `?showLoader=1` to a URL when you want an explicit loader QA URL, for example:
+
+```bash
+http://localhost:3000/?showLoader=1
+```
+
+This does not add a visible debug UI and does not replay the loader during normal client-side navigation.
 
 ## Static Architecture
 
@@ -65,7 +76,7 @@ Current configured public contact fields:
 
 - Email: `vaishnavi.jaiswal@pciinfra.in`
 - LinkedIn: `https://www.linkedin.com/in/vaishnavi-jais27`
-- Location: `Greater Noida / Greater Delhi Area, India`
+- Location: `Noida, Uttar Pradesh, India`
 
 The site does not include a direct submission form.
 

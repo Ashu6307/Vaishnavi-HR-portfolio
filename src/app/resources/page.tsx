@@ -19,7 +19,7 @@ export default function ResourcesPage() {
           eyebrow="Resources"
           level="h1"
           title="Original HR checklists and recruitment structures."
-          intro="Generic, non-confidential resources displayed directly on the website for practical HR and recruitment reference."
+          intro="Practical recruitment and onboarding frameworks for screening, interview evaluation, hiring intake, candidate follow-up, and joining coordination."
         />
         {resources.length > 0 ? (
           <div className="grid gap-5">

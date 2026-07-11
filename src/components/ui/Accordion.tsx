@@ -1,6 +1,8 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import { AnimatePresence, useReducedMotion } from "motion/react";
+import * as m from "motion/react-m";
 import type { ReactNode } from "react";
 import { useId, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -18,6 +20,7 @@ export function Accordion({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className={cn("rounded-2xl border border-border bg-surface", className)}>
@@ -29,13 +32,25 @@ export function Accordion({
         type="button"
       >
         <span>{title}</span>
-        <ChevronDown className={cn("size-5 transition", open && "rotate-180")} aria-hidden />
+        <m.span animate={{ rotate: open && !shouldReduceMotion ? 180 : 0 }}>
+          <ChevronDown className="size-5" aria-hidden />
+        </m.span>
       </button>
-      <div className={cn("grid transition-all", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
-        <div className="overflow-hidden">
-          <div className="border-t border-border px-5 py-4">{children}</div>
-        </div>
-      </div>
+      <AnimatePresence initial={false}>
+        {open ? (
+          <m.div
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            id={id}
+            initial={{ height: 0, opacity: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.24 }}
+          >
+            <div className="overflow-hidden">
+              <div className="border-t border-border px-5 py-4">{children}</div>
+            </div>
+          </m.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

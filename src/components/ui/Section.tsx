@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
+import { MotionReveal } from "@/components/motion/MotionReveal";
 import { cn } from "@/lib/utils";
 
 export function Section({
   children,
   className,
-  id
+  id,
+  reveal = true
 }: {
   children: ReactNode;
   className?: string;
   id?: string;
+  reveal?: boolean;
 }) {
   return (
     <section className={cn("section-shell", className)} id={id}>
-      <div className="container-shell">{children}</div>
+      <div className="container-shell">
+        {reveal ? <MotionReveal>{children}</MotionReveal> : children}
+      </div>
     </section>
   );
 }

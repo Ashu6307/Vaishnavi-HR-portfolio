@@ -1,9 +1,12 @@
+"use client";
+
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import * as m from "motion/react-m";
 import { cn } from "@/lib/utils";
 
 const variants = {
   primary:
-    "bg-accent text-white shadow-soft hover:bg-[rgb(var(--color-accent-strong))] focus-visible:ring-accent",
+    "bg-accent text-[rgb(var(--color-button-text))] shadow-soft hover:bg-[rgb(var(--color-accent-strong))] focus-visible:ring-accent",
   secondary:
     "border border-strong bg-surface text-ink hover:border-accent hover:text-accent focus-visible:ring-accent",
   ghost: "text-ink hover:bg-elevated focus-visible:ring-accent",
@@ -11,20 +14,37 @@ const variants = {
 };
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type SafeButtonAttributes = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "onAnimationStart" | "onDrag" | "onDragEnd" | "onDragStart"
+>;
+
+type SafeAnchorAttributes = Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "onAnimationStart" | "onDrag" | "onDragEnd" | "onDragStart"
+>;
+
+type ButtonProps = SafeButtonAttributes & {
   variant?: keyof typeof variants;
 };
 
-type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+type LinkButtonProps = SafeAnchorAttributes & {
   href: string;
   variant?: keyof typeof variants;
   children: ReactNode;
 };
 
 export function Button({ className, variant = "primary", ...props }: ButtonProps) {
-  return <button className={cn(base, variants[variant], className)} {...props} />;
+  return (
+    <m.button
+      className={cn(base, variants[variant], className)}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      {...props}
+    />
+  );
 }
 
 export function LinkButton({
@@ -39,15 +59,23 @@ export function LinkButton({
 
   if (external) {
     return (
-      <a className={classNames} href={href} rel="noopener noreferrer" target="_blank" {...props}>
+      <m.a
+        className={classNames}
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        {...props}
+      >
         {children}
-      </a>
+      </m.a>
     );
   }
 
   return (
-    <a className={classNames} href={href} {...props}>
+    <m.a className={classNames} href={href} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} {...props}>
       {children}
-    </a>
+    </m.a>
   );
 }

@@ -3,10 +3,12 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import "@/app/globals.css";
 import { BackToTop } from "@/components/layout/BackToTop";
-import { FinalCTA } from "@/components/layout/FinalCTA";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { PageTransition } from "@/components/motion/PageTransition";
 import { Header } from "@/components/navigation/Header";
+import { AppLoader } from "@/components/ui/AppLoader";
 import { siteConfig } from "@/data/site";
 
 const display = Cormorant_Garamond({
@@ -48,14 +50,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en-IN" suppressHydrationWarning>
       <body className={`${display.variable} ${body.variable}`}>
         <ThemeScript />
-        <a className="skip-link" href="#main-content">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main-content">{children}</main>
-        <FinalCTA />
-        <Footer />
-        <BackToTop />
+        <MotionProvider>
+          <AppLoader />
+          <a className="skip-link" href="#main-content">
+            Skip to content
+          </a>
+          <Header />
+          <main id="main-content">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+          <BackToTop />
+        </MotionProvider>
       </body>
     </html>
   );

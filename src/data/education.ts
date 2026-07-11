@@ -6,7 +6,7 @@ export const education: Education[] = [
     qualification: "Post Graduate Diploma in Management",
     specialization: "Human Resources",
     dateRange: "July 2023 to April 2025",
-    location: "Greater Noida, India",
+    location: "Noida, Uttar Pradesh, India",
     relevantAreas: [
       "Human Resource Management",
       "Recruitment and Selection",

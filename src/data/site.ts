@@ -1,16 +1,17 @@
 import type { SiteConfig } from "@/types/content";
+import { profile } from "@/data/profile";
 
 export const siteConfig: SiteConfig = {
   name: "Vaishnavi Jaiswal",
-  title: "Vaishnavi Jaiswal | Human Resources Executive & Talent Acquisition",
+  title: "Vaishnavi Jaiswal | Human Resources Executive",
   description:
-    "Premium professional portfolio for Vaishnavi Jaiswal, Human Resources Executive focused on Non-IT recruitment, talent acquisition, onboarding, and HR operations.",
+    "Professional portfolio of Vaishnavi Jaiswal, a Human Resources Executive experienced in Non-IT recruitment, Talent Acquisition, onboarding, recruitment operations, and HR support.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
-  footerText: "Professional HR portfolio for talent acquisition and recruitment opportunities.",
+  footerText: "All rights reserved.",
   contact: {
     email: "vaishnavi.jaiswal@pciinfra.in",
     phone: "",
     linkedinUrl: "https://www.linkedin.com/in/vaishnavi-jais27",
-    location: "Greater Noida / Greater Delhi Area, India"
+    location: profile.location
   }
 };

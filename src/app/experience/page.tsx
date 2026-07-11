@@ -6,7 +6,7 @@ import { experiences } from "@/data/experience";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "HR & Talent Acquisition Experience | Vaishnavi Jaiswal",
+  "HR and Talent Acquisition Experience | Vaishnavi Jaiswal",
   "Detailed Human Resources, talent acquisition, recruitment research, onboarding, and HR operations experience.",
   "/experience"
 );

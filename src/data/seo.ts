@@ -3,19 +3,19 @@ import type { SEOPageData } from "@/types/content";
 export const seoPages: SEOPageData[] = [
   {
     path: "/",
-    title: "Vaishnavi Jaiswal | Human Resources Executive & Talent Acquisition",
+    title: "Vaishnavi Jaiswal | Human Resources Executive",
     description:
-      "Portfolio of Vaishnavi Jaiswal, Human Resources Executive specializing in Non-IT recruitment, talent acquisition, onboarding, and HR operations."
+      "Professional portfolio of Vaishnavi Jaiswal, a Human Resources Executive experienced in Non-IT recruitment, Talent Acquisition, onboarding, recruitment operations, and HR support."
   },
   {
     path: "/about",
-    title: "Professional Profile | Vaishnavi Jaiswal - HR Executive",
+    title: "Professional Profile | Vaishnavi Jaiswal",
     description:
       "Complete professional profile for Vaishnavi Jaiswal, including HR experience, competencies, education, tools, and professional strengths."
   },
   {
     path: "/experience",
-    title: "HR & Talent Acquisition Experience | Vaishnavi Jaiswal",
+    title: "HR and Talent Acquisition Experience | Vaishnavi Jaiswal",
     description:
       "Detailed Human Resources, talent acquisition, recruitment research, onboarding, and HR operations experience."
   },
@@ -45,14 +45,8 @@ export const seoPages: SEOPageData[] = [
   },
   {
     path: "/contact",
-    title: "Contact Vaishnavi Jaiswal | HR & Talent Acquisition",
+    title: "Contact Vaishnavi Jaiswal | HR and Talent Acquisition",
     description:
       "Contact Vaishnavi Jaiswal for HR job opportunities, talent acquisition opportunities, recruitment collaboration, and professional networking."
-  },
-  {
-    path: "/privacy",
-    title: "Privacy Notice | Vaishnavi Jaiswal Portfolio",
-    description:
-      "Privacy notice for the static professional portfolio of Vaishnavi Jaiswal."
   }
 ];

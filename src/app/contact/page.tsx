@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 import { isConfigured } from "@/lib/utils";
 
 export const metadata = pageMetadata(
-  "Let's Connect | Vaishnavi Jaiswal",
+  "Contact Vaishnavi Jaiswal | HR and Talent Acquisition",
   "Connect with Vaishnavi Jaiswal for professional opportunities, Talent Acquisition discussions, HR collaboration, or professional networking.",
   "/contact"
 );
@@ -84,7 +84,7 @@ export default function ContactPage() {
             icon={<MapPin className="size-5" aria-hidden />}
             title="Location"
             text={siteConfig.contact.location}
-            description="Based in the Greater Noida / Greater Delhi Area, India. No street address or map location is displayed on this static portfolio."
+            description={`Based in ${siteConfig.contact.location}, with a professional focus on HR, Talent Acquisition, and recruitment coordination.`}
           />
 
           <article className="surface-card rounded-[1.25rem] p-6 md:p-7">
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 "Human Resources",
                 "Talent Acquisition",
                 "Non-IT Recruitment",
-                "Candidate Sourcing",
+                "Recruitment Operations",
                 "Employee Onboarding",
                 "HR Operations"
               ].map((item) => (
@@ -119,9 +119,8 @@ export default function ContactPage() {
           <div className="flex gap-3">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
             <p>
-              Please do not share candidate records, employee documents, salary information, or
-              confidential hiring data through public channels. Use email or LinkedIn for the first
-              professional introduction.
+              Please include the role, organization, and purpose of communication in your email for
+              better context.
             </p>
           </div>
         </div>

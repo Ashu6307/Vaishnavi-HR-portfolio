@@ -14,7 +14,7 @@ export const profile: Profile = {
     "Supporting structured hiring journeys from requirement understanding and candidate sourcing to screening, interview coordination, documentation, onboarding, and employee integration.",
   careerDirection:
     "Focused on building a long-term career across Talent Acquisition, Recruitment Operations, Employee Onboarding, and HR Operations while supporting structured and candidate-focused hiring processes.",
-  location: "Greater Noida / Greater Delhi Area, India",
+  location: "Noida, Uttar Pradesh, India",
   profileImage: "/images/vaishnavi-jaiswal-profile.png",
   profileImageAvailable: true,
   focusAreas: [

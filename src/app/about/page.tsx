@@ -13,11 +13,12 @@ import { industries } from "@/data/industries";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/site";
 import { coreCompetencies, skillCategories, workingApproach } from "@/data/skills";
+import { locationToPostalAddress } from "@/lib/location";
 import { pageMetadata } from "@/lib/seo";
 import { absoluteUrl, isConfigured } from "@/lib/utils";
 
 export const metadata = pageMetadata(
-  "Professional Profile | Vaishnavi Jaiswal - HR Executive",
+  "Professional Profile | Vaishnavi Jaiswal",
   "Complete professional profile for Vaishnavi Jaiswal, including HR experience, competencies, education, tools, and professional strengths.",
   "/about"
 );
@@ -37,16 +38,17 @@ export default function AboutPage() {
             name: profile.fullName,
             jobTitle: profile.designation,
             worksFor: profile.currentCompany,
+            address: locationToPostalAddress(profile.location),
             image: absoluteUrl(siteConfig.siteUrl, profile.profileImage)
           }
         }}
       />
       <Breadcrumbs items={[{ label: "Professional Profile" }]} />
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.34fr_0.66fr] lg:items-start">
-          <aside className="surface-card min-w-0 rounded-[1.5rem] p-6 lg:sticky lg:top-28">
-            <ProfileImage className="mx-auto max-w-[260px]" />
-            <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-ink">
+        <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
+          <aside className="surface-card min-w-0 rounded-[1.5rem] p-6 min-[1180px]:sticky min-[1180px]:top-28">
+            <ProfileImage className="mx-auto max-w-[230px]" />
+            <h1 className="mt-6 text-balance font-serif text-[2.15rem] font-semibold leading-tight text-ink">
               Professional Profile
             </h1>
             <p className="mt-3 font-semibold text-accent">{profile.fullName}</p>
@@ -75,20 +77,14 @@ export default function AboutPage() {
                 </a>
               ) : null}
             </div>
-            <SidebarGroup title="Core HR Skills" items={coreCompetencies.slice(0, 8)} />
-            <SidebarGroup
-              title="Recruitment Platforms"
-              items={["LinkedIn", "Naukri", "Job Portals", "Candidate Databases"]}
-            />
-            <SidebarGroup title="Industry Exposure" items={industries.map((industry) => industry.title)} />
-            <SidebarGroup title="Professional Strengths" items={skillCategories[5].skills.slice(0, 10)} />
+            <SidebarGroup title="Core HR Skills" items={coreCompetencies.slice(0, 6)} />
           </aside>
 
           <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
             <header className="surface-card rounded-[1.5rem] p-7 md:p-10">
               <p className="label-text">Career journey, HR competencies, experience, education, tools, and professional strengths.</p>
               <h2 className="mt-4 max-w-4xl font-serif text-5xl font-semibold leading-tight text-ink">
-                {profile.headline}
+                Professional profile across Non-IT recruitment, onboarding, and HR operations.
               </h2>
               <p className="mt-6 text-lg leading-8 text-muted">{profile.summary}</p>
             </header>
@@ -133,6 +129,9 @@ export default function AboutPage() {
                   </article>
                 ))}
               </div>
+              <LinkButton className="mt-5" href="/education" variant="secondary">
+                View Education
+              </LinkButton>
             </ProfileSection>
 
             <ProfileSection title="Academic Project">
@@ -153,6 +152,14 @@ export default function AboutPage() {
 
             <ProfileSection title="Recruitment Tools and Platforms">
               <TagList items={skillCategories[4].skills} />
+            </ProfileSection>
+
+            <ProfileSection title="Industry Exposure">
+              <TagList items={industries.map((industry) => industry.title)} />
+            </ProfileSection>
+
+            <ProfileSection title="Professional Strengths">
+              <TagList items={skillCategories[5].skills} label="professional strengths" limit={8} />
             </ProfileSection>
 
             <ProfileSection title="Working Approach">

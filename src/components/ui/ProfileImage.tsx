@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import * as m from "motion/react-m";
 import { useState } from "react";
+import { AnimatedPortraitFrame } from "@/components/profile/AnimatedPortraitFrame";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
@@ -18,12 +20,17 @@ export function ProfileImage({
   const [hasImage, setHasImage] = useState(profile.profileImageAvailable);
 
   return (
-    <div
+    <m.div
       className={cn(
         "relative overflow-hidden border border-strong bg-elevated shadow-soft",
         size === "large" ? "aspect-[4/5] rounded-[1.5rem]" : "aspect-[4/5] w-32 rounded-3xl",
         className
       )}
+      initial={{ opacity: 0, scale: 0.97, y: 8 }}
+      viewport={{ once: true, amount: 0.35 }}
+      whileHover={{ y: -2 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {hasImage ? (
         <Image
@@ -40,6 +47,7 @@ export function ProfileImage({
       <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_top_left,rgb(var(--color-sage)/0.22),transparent_42%),linear-gradient(135deg,rgb(var(--color-surface)),rgb(var(--color-elevated)))]">
         <span className="font-serif text-6xl font-semibold text-accent">{profile.initials}</span>
       </div>
-    </div>
+      <AnimatedPortraitFrame />
+    </m.div>
   );
 }

@@ -6,7 +6,7 @@ export const experiences: CompanyExperience[] = [
     designation: "Human Resources Executive",
     employmentType: "Full-time",
     dateRange: "November 2025 to Present",
-    location: "Greater Noida, India",
+    location: "Noida, Uttar Pradesh, India",
     workMode: "On-site",
     summary:
       "Responsible for supporting structured recruitment and onboarding processes, including sourcing, screening, interview coordination, documentation, background-verification coordination, employee orientation, and new-joiner support.",

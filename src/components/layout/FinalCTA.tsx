@@ -1,4 +1,5 @@
 import { Linkedin, Mail } from "lucide-react";
+import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionReveal";
 import { LinkButton } from "@/components/ui/Button";
 import { siteConfig } from "@/data/site";
 import { isConfigured } from "@/lib/utils";
@@ -9,15 +10,15 @@ export function FinalCTA() {
 
   return (
     <section className="border-y border-border bg-surface">
-      <div className="container-shell grid gap-6 py-14 lg:grid-cols-[1fr_auto] lg:items-center">
-        <div>
+      <MotionStagger className="container-shell grid gap-6 py-14 lg:grid-cols-[1fr_auto] lg:items-center">
+        <MotionStaggerItem>
           <p className="label-text">Professional Connection</p>
-          <h2 className="mt-3 font-serif text-4xl font-semibold leading-tight text-ink">
-            Open to HR opportunities, talent acquisition roles, recruitment collaboration, and
+          <h2 className="mt-3 max-w-4xl text-balance font-serif text-3xl font-semibold leading-tight text-ink md:text-[2.4rem]">
+            Open to HR opportunities, Talent Acquisition roles, recruitment collaboration, and
             professional networking.
           </h2>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        </MotionStaggerItem>
+        <MotionStaggerItem className="flex flex-col gap-3 sm:flex-row lg:justify-end">
           {hasEmail ? (
             <LinkButton href={`mailto:${siteConfig.contact.email}`}>
               <Mail className="size-4" aria-hidden />
@@ -30,8 +31,8 @@ export function FinalCTA() {
               Connect on LinkedIn
             </LinkButton>
           ) : null}
-        </div>
-      </div>
+        </MotionStaggerItem>
+      </MotionStagger>
     </section>
   );
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import { ArrowUp } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -15,16 +16,26 @@ export function BackToTop() {
   }, []);
 
   return (
-    <button
-      aria-label="Back to top"
-      className={cn(
-        "fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full border border-strong bg-surface text-accent shadow-soft transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
-      )}
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      type="button"
-    >
-      <ArrowUp className="size-5" aria-hidden />
-    </button>
+    <AnimatePresence>
+      {visible ? (
+        <m.button
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          aria-label="Back to top"
+          className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-5 z-40 grid size-12 place-items-center rounded-full border border-strong bg-surface text-accent shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          exit={{ opacity: 0, scale: 0.92, y: 8 }}
+          initial={{ opacity: 0, scale: 0.9, y: 8 }}
+          onClick={() => {
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+          }}
+          transition={{ duration: 0.18 }}
+          type="button"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          <ArrowUp className="size-5" aria-hidden />
+        </m.button>
+      ) : null}
+    </AnimatePresence>
   );
 }
