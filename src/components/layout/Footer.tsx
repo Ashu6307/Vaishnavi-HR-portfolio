@@ -18,23 +18,23 @@ export function Footer() {
   const linkedInAvailable = isConfigured(siteConfig.contact.linkedinUrl);
 
   return (
-    <footer className="border-t border-border bg-[rgb(var(--color-surface)/0.86)]">
+    <footer className="site-footer border-t border-border bg-[rgb(var(--color-surface)/0.86)]">
       <div className="container-shell py-12 md:py-14">
         <MotionStagger className="grid gap-9 md:grid-cols-2 lg:grid-cols-[minmax(280px,1.5fr)_minmax(130px,0.75fr)_minmax(130px,0.75fr)_minmax(180px,0.9fr)] lg:items-start">
           <MotionStaggerItem>
             <p className="font-serif text-3xl font-semibold leading-tight text-ink">{profile.fullName}</p>
             <p className="mt-2 font-semibold text-accent">{profile.designation}</p>
-            <p className="mt-3 max-w-md text-[0.98rem] leading-7 text-muted">
+            <p className="footer-muted mt-3 max-w-md text-[0.98rem] leading-7 text-muted">
               Human Resources Executive focused on Non-IT hiring, Talent Acquisition,
               onboarding, and organized HR operations.
             </p>
-            <div className="mt-5 grid gap-3 text-[0.96rem] text-muted">
+            <div className="footer-muted mt-5 grid gap-3 text-[0.96rem] text-muted">
               <p className="flex gap-2">
                 <MapPin className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
                 <span>{siteConfig.contact.location}</span>
               </p>
               {emailAvailable ? (
-                <a className="flex gap-2 hover:text-accent" href={`mailto:${siteConfig.contact.email}`}>
+                <a className="footer-link flex gap-2 hover:text-accent" href={`mailto:${siteConfig.contact.email}`}>
                   <Mail className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
                   <span className="safe-wrap">{siteConfig.contact.email}</span>
                 </a>
@@ -65,7 +65,7 @@ export function Footer() {
           </MotionStaggerItem>
         </MotionStagger>
 
-        <div className="mt-10 border-t border-border pt-5 text-sm text-muted">
+        <div className="footer-copyright mt-10 border-t border-border pt-5 text-sm text-muted">
           <p>
             © {new Date().getFullYear()} {profile.fullName}. {siteConfig.footerText}
           </p>
@@ -82,7 +82,7 @@ function FooterGroup({ title, items }: { title: string; items: Array<{ label: st
       <ul className="mt-4 grid gap-3">
         {items.map((item) => (
           <li key={item.href}>
-            <a className="inline-flex min-h-10 items-center text-[0.96rem] font-semibold text-muted hover:text-accent" href={item.href}>
+            <a className="footer-link inline-flex min-h-10 items-center text-[0.96rem] font-semibold text-muted hover:text-accent" href={item.href}>
               {item.label}
             </a>
           </li>

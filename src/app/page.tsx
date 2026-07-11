@@ -60,32 +60,32 @@ export default function HomePage() {
         }}
       />
 
-      <section className="relative overflow-hidden">
-        <div className="container-shell grid min-h-[calc(100vh-5rem)] gap-10 py-16 lg:grid-cols-[1.05fr_0.8fr] lg:items-center">
+      <section className="hero-section relative overflow-hidden">
+        <div className="container-shell hero-layout grid gap-8 py-10 pb-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.05fr_0.8fr] lg:items-center lg:gap-10 lg:py-16">
           <MotionStagger>
             <MotionStaggerItem>
               <p className="label-text">Human Resources • Talent Acquisition • HR Operations</p>
             </MotionStaggerItem>
             <MotionStaggerItem>
-              <h1 className="mt-5 max-w-4xl text-balance font-serif text-5xl font-semibold leading-[0.95] text-ink md:text-7xl">
+              <h1 className="mt-4 max-w-4xl text-balance font-serif text-5xl font-semibold leading-[0.95] text-ink md:mt-5 md:text-7xl">
                 {profile.fullName}
               </h1>
             </MotionStaggerItem>
             <MotionStaggerItem>
-              <p className="mt-5 text-xl font-semibold text-accent md:text-2xl">{profile.designation}</p>
+              <p className="mt-4 text-xl font-semibold text-accent md:mt-5 md:text-2xl">{profile.designation}</p>
             </MotionStaggerItem>
-          <MotionStaggerItem>
-            <p className="mt-6 max-w-3xl text-balance text-2xl font-semibold leading-snug text-ink md:text-4xl">
-                Coordinating hiring journeys from sourcing to onboarding.
-            </p>
-          </MotionStaggerItem>
             <MotionStaggerItem>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
+              <p className="mt-5 max-w-3xl text-balance text-2xl font-semibold leading-snug text-ink md:mt-6 md:text-4xl">
+                Coordinating hiring journeys from sourcing to onboarding.
+              </p>
+            </MotionStaggerItem>
+            <MotionStaggerItem>
+              <p className="hero-supporting-copy mt-5 max-w-2xl text-lg leading-8 text-muted md:mt-6">
                 Experienced in Non-IT recruitment, candidate sourcing, screening, interview
                 coordination, recruitment documentation, employee onboarding, and HR operations.
               </p>
             </MotionStaggerItem>
-            <MotionStaggerItem className="mt-6 grid gap-3 text-sm font-semibold text-muted sm:grid-cols-3">
+            <MotionStaggerItem className="hero-meta-strip mt-5 grid gap-3 text-sm font-semibold text-muted sm:grid-cols-3 md:mt-6">
               <p className="flex items-center gap-2">
                 <CheckCircle2 className="size-4 text-accent" aria-hidden />
                 Human Resources Executive
@@ -99,7 +99,7 @@ export default function HomePage() {
                 {profile.location}
               </p>
             </MotionStaggerItem>
-            <MotionStaggerItem className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <MotionStaggerItem className="hero-cta-row mt-7 flex flex-col gap-3 sm:flex-row md:mt-8">
               <LinkButton href="/experience">Explore Experience</LinkButton>
               <LinkButton href={emailHref} variant="secondary">
                 <Mail className="size-4" aria-hidden />
@@ -110,10 +110,10 @@ export default function HomePage() {
               </LinkButton>
             </MotionStaggerItem>
           </MotionStagger>
-          <MotionReveal className="relative">
+          <MotionReveal className="hero-portrait relative">
             <div className="absolute -left-4 top-8 hidden h-40 w-40 rounded-full border border-strong lg:block" />
-            <ProfileImage className="mx-auto max-w-[360px]" priority />
-            <div className="surface-card mx-auto mt-4 max-w-sm rounded-[1.25rem] p-5 text-sm font-semibold text-ink">
+            <ProfileImage className="hero-profile-image mx-auto max-w-[360px]" priority />
+            <div className="hero-portrait-note surface-card mx-auto mt-4 max-w-sm rounded-[1.25rem] p-5 text-sm font-semibold text-ink">
               <p>{profile.alternativeHeroLine}</p>
             </div>
           </MotionReveal>

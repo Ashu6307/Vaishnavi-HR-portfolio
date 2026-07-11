@@ -16,6 +16,33 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+const processSnapshotLabels: Record<string, string[]> = {
+  "end-to-end-non-it-recruitment": [
+    "Clarify hiring need",
+    "Define screening filters",
+    "Align role language",
+    "Build candidate pipeline"
+  ],
+  "candidate-sourcing-market-mapping": [
+    "Set search direction",
+    "Map candidate profile",
+    "Select sourcing channels",
+    "Review pipeline quality"
+  ],
+  "structured-employee-onboarding": [
+    "Guide pre-joining",
+    "Track joining records",
+    "Support orientation",
+    "Update HR handoff"
+  ],
+  "recruitment-operations-tracking": [
+    "Register requirement",
+    "Structure candidate view",
+    "Monitor stage movement",
+    "Share role-level updates"
+  ]
+};
+
 export function generateStaticParams() {
   return caseStudies.map((study) => ({ slug: study.slug }));
 }
@@ -36,6 +63,8 @@ export default async function CaseStudyPage({ params }: Props) {
   const currentIndex = caseStudies.findIndex((item) => item.slug === study.slug);
   const previousStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
   const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+  const snapshotLabels =
+    processSnapshotLabels[study.slug] ?? study.sections.slice(0, 4).map((section) => section.title);
 
   return (
     <>
@@ -68,10 +97,10 @@ export default async function CaseStudyPage({ params }: Props) {
           <div className="mt-8 rounded-[1.25rem] border border-border bg-elevated p-5">
             <h2 className="font-serif text-3xl font-semibold text-ink">Process Snapshot</h2>
             <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {study.sections.slice(0, 4).map((section, index) => (
-                <li className="rounded-2xl border border-border bg-surface p-4" key={section.title}>
+              {snapshotLabels.map((label, index) => (
+                <li className="rounded-2xl border border-border bg-surface p-4" key={label}>
                   <span className="text-sm font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
-                  <p className="mt-2 font-semibold leading-snug text-ink">{section.title}</p>
+                  <p className="mt-2 font-semibold leading-snug text-ink">{label}</p>
                 </li>
               ))}
             </ol>
