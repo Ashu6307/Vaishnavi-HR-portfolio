@@ -9,13 +9,16 @@ export const profile: Profile = {
     "Human Resources Executive | Non-IT Talent Acquisition | End-to-End Recruitment | Onboarding & HR Operations",
   alternativeHeroLine: "Building dependable talent pipelines and smooth onboarding experiences.",
   summary:
-    "Vaishnavi Jaiswal is a Human Resources Executive with practical experience across Non-IT talent acquisition, recruitment research, candidate sourcing, screening, interview coordination, recruitment documentation, employee onboarding, and HR operations. Her exposure spans recruitment requirements across manufacturing, EPC, infrastructure, water, railway, power, gems and jewellery, and broader Non-IT hiring environments. She supports structured hiring cycles by understanding manpower requirements, aligning job descriptions, identifying sourcing channels, screening profiles, coordinating interviews, managing candidate follow-ups, and supporting offer, joining, and onboarding documentation. Her working style is process-led and candidate-conscious, with attention to timely communication, accurate HR records, background-verification coordination, induction support, and smooth employee integration.",
+    "Vaishnavi Jaiswal is a Human Resources Executive with practical experience across Non-IT talent acquisition, recruitment research, candidate sourcing, screening, interview scheduling, HR records, employee onboarding, and day-to-day HR operations. Her exposure spans hiring requirements across manufacturing, EPC, infrastructure, water, railway, power, gems and jewellery, and broader Non-IT environments. She works through manpower requirements, job-description alignment, sourcing channels, profile screening, interview follow-ups, offer and joining records, background-verification steps, induction activity, and smooth employee integration.",
   shortIntro:
-    "Supporting structured hiring journeys from requirement understanding and candidate sourcing to screening, interview coordination, documentation, onboarding, and employee integration.",
+    "Managing hiring steps from requirement understanding and sourcing to screening, interviews, records, onboarding, and employee integration.",
   careerDirection:
-    "Focused on building a long-term career across Talent Acquisition, Recruitment Operations, Employee Onboarding, and HR Operations while supporting structured and candidate-focused hiring processes.",
+    "Focused on building a long-term career across Talent Acquisition, Recruitment Operations, Employee Onboarding, and HR Operations while contributing to organized, candidate-focused hiring processes.",
   location: "Noida, Uttar Pradesh, India",
   profileImage: "/images/vaishnavi-jaiswal-profile.png",
+  profileImageWebp: "/images/vaishnavi-jaiswal-profile-720.webp",
+  profileImageSrcSet:
+    "/images/vaishnavi-jaiswal-profile-480.webp 480w, /images/vaishnavi-jaiswal-profile-720.webp 720w, /images/vaishnavi-jaiswal-profile-960.webp 960w",
   profileImageAvailable: true,
   focusAreas: [
     "Human Resources",

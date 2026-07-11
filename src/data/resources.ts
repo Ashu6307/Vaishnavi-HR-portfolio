@@ -4,7 +4,7 @@ export const resources: Resource[] = [
   {
     slug: "candidate-screening-checklist",
     title: "Candidate Screening Checklist",
-    purpose: "Support consistent preliminary screening before shortlisting.",
+    purpose: "Keep preliminary screening consistent before shortlisting.",
     whenToUse: "Use before sending profiles to a hiring manager or recruitment stakeholder.",
     suggestedFields: [
       "Role requirement",
@@ -32,7 +32,7 @@ export const resources: Resource[] = [
   {
     slug: "interview-evaluation-scorecard",
     title: "Interview Evaluation Scorecard",
-    purpose: "Create a structured way to capture interview observations.",
+    purpose: "Capture interview observations in a consistent review format.",
     whenToUse: "Use during preliminary interviews or after a candidate discussion.",
     suggestedFields: [
       "Role",
@@ -61,7 +61,7 @@ export const resources: Resource[] = [
   {
     slug: "new-employee-onboarding-checklist",
     title: "New Employee Onboarding Checklist",
-    purpose: "Support a smoother joining and induction experience.",
+    purpose: "Guide a smoother joining and induction experience.",
     whenToUse: "Use from pre-joining communication through first-day orientation.",
     suggestedFields: [
       "New-joiner name",

@@ -15,7 +15,7 @@ import { siteConfig } from "@/data/site";
 import { coreCompetencies, skillCategories, workingApproach } from "@/data/skills";
 import { locationToPostalAddress } from "@/lib/location";
 import { pageMetadata } from "@/lib/seo";
-import { absoluteUrl, isConfigured } from "@/lib/utils";
+import { canonicalUrl, isConfigured } from "@/lib/utils";
 
 export const metadata = pageMetadata(
   "Professional Profile | Vaishnavi Jaiswal",
@@ -39,7 +39,7 @@ export default function AboutPage() {
             jobTitle: profile.designation,
             worksFor: profile.currentCompany,
             address: locationToPostalAddress(profile.location),
-            image: absoluteUrl(siteConfig.siteUrl, profile.profileImage)
+            image: canonicalUrl(siteConfig.siteUrl, profile.profileImage)
           }
         }}
       />
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
           <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
             <header className="surface-card rounded-[1.5rem] p-7 md:p-10">
-              <p className="label-text">Career journey, HR competencies, experience, education, tools, and professional strengths.</p>
+              <p className="label-text">Career journey, HR competencies, experience, education, tools, and strengths.</p>
               <h2 className="mt-4 max-w-4xl font-serif text-5xl font-semibold leading-tight text-ink">
                 Professional profile across Non-IT recruitment, onboarding, and HR operations.
               </h2>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/site";
-import { absoluteUrl } from "@/lib/utils";
+import { canonicalUrl } from "@/lib/utils";
 
 export function pageMetadata(title: string, description: string, path: string): Metadata {
-  const url = absoluteUrl(siteConfig.siteUrl, path);
+  const url = canonicalUrl(siteConfig.siteUrl, path);
+  const imageUrl = canonicalUrl(siteConfig.siteUrl, "/images/og-vaishnavi-jaiswal.png");
 
   return {
     title,
@@ -17,12 +18,21 @@ export function pageMetadata(title: string, description: string, path: string): 
       url,
       siteName: siteConfig.name,
       type: "website",
-      locale: "en_IN"
+      locale: "en_IN",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: "Vaishnavi Jaiswal, Human Resources Executive"
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description
+      description,
+      images: [imageUrl]
     }
   };
 }

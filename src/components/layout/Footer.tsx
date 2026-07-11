@@ -25,8 +25,8 @@ export function Footer() {
             <p className="font-serif text-3xl font-semibold leading-tight text-ink">{profile.fullName}</p>
             <p className="mt-2 font-semibold text-accent">{profile.designation}</p>
             <p className="mt-3 max-w-md text-[0.98rem] leading-7 text-muted">
-              Human Resources Executive focused on Non-IT recruitment, Talent Acquisition,
-              onboarding, and HR operations.
+              Human Resources Executive focused on Non-IT hiring, Talent Acquisition,
+              onboarding, and organized HR operations.
             </p>
             <div className="mt-5 grid gap-3 text-[0.96rem] text-muted">
               <p className="flex gap-2">
@@ -82,7 +82,7 @@ function FooterGroup({ title, items }: { title: string; items: Array<{ label: st
       <ul className="mt-4 grid gap-3">
         {items.map((item) => (
           <li key={item.href}>
-            <a className="text-[0.96rem] font-semibold text-muted hover:text-accent" href={item.href}>
+            <a className="inline-flex min-h-10 items-center text-[0.96rem] font-semibold text-muted hover:text-accent" href={item.href}>
               {item.label}
             </a>
           </li>

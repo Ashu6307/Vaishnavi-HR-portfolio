@@ -19,12 +19,13 @@ export default function ResourcesPage() {
           eyebrow="Resources"
           level="h1"
           title="Original HR checklists and recruitment structures."
-          intro="Practical recruitment and onboarding frameworks for screening, interview evaluation, hiring intake, candidate follow-up, and joining coordination."
+          intro="Practical frameworks for screening, interview evaluation, hiring intake, follow-up, and joining activity."
         />
         {resources.length > 0 ? (
           <div className="grid gap-5">
             {resources.map((resource) => (
               <article className="surface-card rounded-[1.25rem] p-6" key={resource.slug}>
+                <p className="label-text mb-3">HR Resource</p>
                 <h2 className="font-serif text-3xl font-semibold text-ink">{resource.title}</h2>
                 <div className="mt-4 grid gap-4 md:grid-cols-2">
                   <InfoBlock title="Purpose" text={resource.purpose} />

@@ -15,7 +15,7 @@ import { siteConfig } from "@/data/site";
 import { coreCompetencies, workingApproach } from "@/data/skills";
 import { locationToPostalAddress } from "@/lib/location";
 import { pageMetadata } from "@/lib/seo";
-import { absoluteUrl, isConfigured } from "@/lib/utils";
+import { canonicalUrl, isConfigured } from "@/lib/utils";
 
 export const metadata = pageMetadata(
   "Vaishnavi Jaiswal | Human Resources Executive",
@@ -42,7 +42,7 @@ export default function HomePage() {
             name: profile.currentCompany
           },
           address: locationToPostalAddress(profile.location),
-          image: absoluteUrl(siteConfig.siteUrl, profile.profileImage),
+          image: canonicalUrl(siteConfig.siteUrl, profile.profileImage),
           sameAs: siteConfig.contact.linkedinUrl,
           alumniOf: [
             "GNIOT Institute of Management Studies",
@@ -55,7 +55,7 @@ export default function HomePage() {
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: siteConfig.name,
-          url: siteConfig.siteUrl,
+          url: canonicalUrl(siteConfig.siteUrl),
           description: siteConfig.description
         }}
       />
@@ -74,11 +74,11 @@ export default function HomePage() {
             <MotionStaggerItem>
               <p className="mt-5 text-xl font-semibold text-accent md:text-2xl">{profile.designation}</p>
             </MotionStaggerItem>
-            <MotionStaggerItem>
-              <p className="mt-6 max-w-3xl text-balance text-2xl font-semibold leading-snug text-ink md:text-4xl">
-                Supporting structured recruitment journeys from sourcing to onboarding.
-              </p>
-            </MotionStaggerItem>
+          <MotionStaggerItem>
+            <p className="mt-6 max-w-3xl text-balance text-2xl font-semibold leading-snug text-ink md:text-4xl">
+                Coordinating hiring journeys from sourcing to onboarding.
+            </p>
+          </MotionStaggerItem>
             <MotionStaggerItem>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
                 Experienced in Non-IT recruitment, candidate sourcing, screening, interview
@@ -144,8 +144,8 @@ export default function HomePage() {
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeading
             eyebrow="Professional Introduction"
-            title="Structured hiring support from sourcing to employee integration."
-            intro="Vaishnavi supports hiring cycles with requirement clarity, candidate communication, documentation discipline, and onboarding coordination."
+            title="Practical hiring support from sourcing to employee integration."
+            intro="Vaishnavi works through requirement clarity, candidate communication, document discipline, and onboarding follow-up."
           />
           <div className="surface-card rounded-[1.25rem] p-7">
             <p className="text-lg leading-8 text-muted">{profile.summary}</p>

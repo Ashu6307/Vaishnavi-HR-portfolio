@@ -222,6 +222,8 @@ svg {
 .theme-toggle__button {
   position: relative;
   display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
   min-width: 2.5rem;
   min-height: 2.5rem;
   align-items: center;
@@ -392,6 +394,46 @@ svg {
 @media (max-width: 640px) {
   .container-shell {
     width: min(calc(100% - 1.25rem), 1180px);
+  }
+}
+
+@media (max-width: 360px) {
+  .header-shell {
+    width: min(calc(100% - 0.75rem), 1180px);
+  }
+
+  .header-brand {
+    gap: 0.45rem;
+  }
+
+  .header-brand__mark,
+  .mobile-header-actions > button {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .header-brand__name {
+    max-width: 7.25rem;
+    font-size: 1.02rem;
+  }
+
+  .header-brand__subtitle {
+    display: none;
+  }
+
+  .mobile-header-actions {
+    gap: 0.35rem;
+  }
+
+  .mobile-header-actions .theme-toggle {
+    padding: 0.18rem;
+  }
+
+  .mobile-header-actions .theme-toggle__button {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
   }
 }
 

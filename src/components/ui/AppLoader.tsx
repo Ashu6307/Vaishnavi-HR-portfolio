@@ -4,9 +4,10 @@ import * as m from "motion/react-m";
 import { useEffect, useState } from "react";
 import { loaderContainer, loaderItem } from "@/lib/motion";
 
-const MIN_DURATION = 1000;
-const MAX_DURATION = 1500;
-const EXIT_DURATION = 220;
+const SESSION_KEY = "vj-loader-shown";
+const MIN_DURATION = 600;
+const MAX_DURATION = 1100;
+const EXIT_DURATION = 120;
 
 export function AppLoader() {
   const [phase, setPhase] = useState<"visible" | "exiting" | "hidden">("visible");
@@ -14,6 +15,20 @@ export function AppLoader() {
   useEffect(() => {
     const body = document.body;
     const html = document.documentElement;
+    const navigationEntry = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined;
+    const navigationType = navigationEntry?.type;
+    const alreadyShown = sessionStorage.getItem(SESSION_KEY) === "true";
+
+    if (alreadyShown && navigationType !== "reload") {
+      body.classList.remove("app-loading");
+      body.classList.add("app-ready");
+      html.classList.add("app-ready");
+      const skipFrame = window.requestAnimationFrame(() => setPhase("hidden"));
+      return () => window.cancelAnimationFrame(skipFrame);
+    }
+
     const loaderStart = performance.now();
     let ready = document.readyState === "interactive" || document.readyState === "complete";
     let minElapsed = false;
@@ -25,6 +40,7 @@ export function AppLoader() {
     const hide = () => {
       if (settled) return;
       settled = true;
+      sessionStorage.setItem(SESSION_KEY, "true");
       body.classList.remove("app-loading");
       body.classList.add("app-ready");
       html.classList.add("app-ready");

@@ -28,7 +28,7 @@ export const academicProject: Project = {
   title: "Live Project on Marketing Strategy",
   date: "July 2024",
   overview:
-    "A structured academic live project focused on observing marketing strategy at a high level, understanding market context, organizing research observations, and presenting professional findings.",
+    "An academic live project focused on observing marketing strategy at a high level, understanding market context, organizing research notes, and presenting professional findings.",
   sections: [
     {
       title: "Project overview",
@@ -43,7 +43,7 @@ export const academicProject: Project = {
     {
       title: "Research approach",
       description:
-        "Organized project learning through practical research, note-taking, and structured synthesis."
+        "Organized project learning through practical research, note-taking, and clear synthesis."
     },
     {
       title: "Presentation and reporting",

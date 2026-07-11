@@ -3,7 +3,9 @@ import { CaseStudyCard } from "@/components/cards/CaseStudyCard";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { caseStudies } from "@/data/case-studies";
+import { siteConfig } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
+import { canonicalUrl } from "@/lib/utils";
 
 export const metadata = pageMetadata(
   "Anonymized HR Workflows & Recruitment Case Studies",
@@ -22,7 +24,7 @@ export default function WorkPage() {
             "@type": "ListItem",
             position: index + 1,
             name: study.title,
-            url: `/work/${study.slug}`
+            url: canonicalUrl(siteConfig.siteUrl, `/work/${study.slug}`)
           }))
         }}
       />

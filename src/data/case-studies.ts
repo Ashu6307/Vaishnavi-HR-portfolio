@@ -5,7 +5,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "end-to-end-non-it-recruitment",
     title: "End-to-End Non-IT Recruitment Workflow",
     summary:
-      "A process view of a structured Non-IT hiring cycle from requirement understanding to onboarding handoff.",
+      "A process view of a Non-IT hiring cycle from requirement understanding to onboarding handoff.",
     context:
       "This anonymized workflow explains how a recruitment requirement can be moved through sourcing, screening, interview coordination, documentation, and joining follow-up without exposing candidate, client, or company-confidential information.",
     sections: [
@@ -59,7 +59,7 @@ export const caseStudies: CaseStudy[] = [
       "Joining Follow-Up"
     ],
     learning:
-      "A reliable hiring workflow depends on requirement clarity, organized candidate tracking, respectful follow-up, and accurate documentation."
+      "A reliable hiring workflow depends on requirement clarity, organized tracking, respectful follow-up, and accurate records."
   },
   {
     slug: "candidate-sourcing-market-mapping",
@@ -111,7 +111,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "structured-employee-onboarding",
     title: "Structured Employee Onboarding Workflow",
     summary:
-      "A practical onboarding workflow for pre-joining communication, documentation, induction, and new-joiner support.",
+      "A practical onboarding workflow for pre-joining communication, records, induction, and new-joiner support.",
     context:
       "This anonymized workflow focuses on process steps that help new employees move from selection to workplace integration.",
     sections: [
@@ -156,7 +156,7 @@ export const caseStudies: CaseStudy[] = [
       "Induction Support"
     ],
     learning:
-      "A structured onboarding experience reduces confusion for new joiners and supports cleaner HR documentation."
+      "A clear onboarding experience reduces confusion for new joiners and keeps HR records cleaner."
   },
   {
     slug: "recruitment-operations-tracking",
@@ -164,7 +164,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A recruitment tracker structure for requirement status, candidate movement, interview status, and joining follow-up.",
     context:
-      "This anonymized case study explains a process-based tracker structure without sharing candidate contact details, salaries, internal documents, or client names.",
+      "This anonymized case study explains a process-based tracker without sharing candidate contact details, salaries, internal documents, or client names.",
     sections: [
       {
         title: "Requirement register",
@@ -202,6 +202,6 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Microsoft Excel", "Candidate Databases", "Microsoft Office"],
     skills: ["Recruitment Tracking", "Recruitment Documentation", "Candidate Follow-Up"],
     learning:
-      "Recruitment operations become easier to manage when every requirement, candidate stage, and follow-up owner is visible in a disciplined tracker."
+      "Recruitment operations become easier to manage when every requirement, candidate stage, and follow-up owner is visible in one disciplined tracker."
   }
 ];

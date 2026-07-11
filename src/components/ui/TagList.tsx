@@ -17,25 +17,31 @@ export function TagList({
   limit?: number;
   label?: string;
 }) {
-  const listId = useId();
+  const generatedId = useId();
+  const controlledRegionId = `${generatedId}-tags`;
   const containerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const measureToggleRef = useRef<HTMLButtonElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const [measuredVisibleLimit, setMeasuredVisibleLimit] = useState<number | null>(null);
+  const [measuredVisibleIndices, setMeasuredVisibleIndices] = useState<number[] | null>(null);
   const hasLimit = typeof limit === "number" && limit >= 0;
   const visibleLimit = hasLimit ? limit : items.length;
   const baseHiddenCount = Math.max(items.length - visibleLimit, 0);
   const shouldShowToggle = baseHiddenCount > 0;
-  const collapsedVisibleLimit = shouldShowToggle
-    ? Math.min(measuredVisibleLimit ?? visibleLimit, visibleLimit, items.length)
-    : visibleLimit;
-  const visibleItems = shouldShowToggle && !expanded ? items.slice(0, collapsedVisibleLimit) : items;
-  const hiddenCount = shouldShowToggle && !expanded ? Math.max(items.length - collapsedVisibleLimit, 0) : baseHiddenCount;
+  const collapsedVisibleIndices =
+    shouldShowToggle && !expanded
+      ? (measuredVisibleIndices ?? items.slice(0, visibleLimit).map((_, index) => index))
+      : items.map((_, index) => index);
+  const visibleItems = collapsedVisibleIndices.map((itemIndex) => ({
+    item: items[itemIndex],
+    originalIndex: itemIndex
+  }));
+  const hiddenCount =
+    shouldShowToggle && !expanded ? Math.max(items.length - collapsedVisibleIndices.length, 0) : baseHiddenCount;
 
   const measureCollapsedRow = useCallback(() => {
     if (!shouldShowToggle || expanded) {
-      setMeasuredVisibleLimit(null);
+      setMeasuredVisibleIndices(null);
       return;
     }
 
@@ -50,21 +56,27 @@ export function TagList({
     const styles = window.getComputedStyle(measure);
     const gap = Number.parseFloat(styles.columnGap || styles.gap || "8") || 8;
     const chipElements = Array.from(measure.querySelectorAll<HTMLElement>("[data-chip-measure]"));
-    const maxVisible = Math.min(visibleLimit, chipElements.length);
+    const maxVisible = Math.min(visibleLimit, items.length);
     const toggleWidth = toggle.getBoundingClientRect().width;
     let usedWidth = toggleWidth;
-    let nextVisibleLimit = 0;
+    const selectedIndices: number[] = [];
+    const measuredChips = chipElements
+      .map((chip, index) => ({
+        index,
+        width: chip.getBoundingClientRect().width
+      }))
+      .sort((a, b) => a.width - b.width || a.index - b.index);
 
-    for (let index = 0; index < maxVisible; index += 1) {
-      const chipWidth = chipElements[index].getBoundingClientRect().width;
-      const nextWidth = usedWidth + gap + chipWidth;
+    for (const chip of measuredChips) {
+      if (selectedIndices.length >= maxVisible) break;
+      const nextWidth = usedWidth + gap + chip.width;
       if (nextWidth > containerWidth) break;
       usedWidth = nextWidth;
-      nextVisibleLimit = index + 1;
+      selectedIndices.push(chip.index);
     }
 
-    setMeasuredVisibleLimit(nextVisibleLimit);
-  }, [expanded, shouldShowToggle, visibleLimit]);
+    setMeasuredVisibleIndices(selectedIndices.sort((a, b) => a - b));
+  }, [expanded, items.length, shouldShowToggle, visibleLimit]);
 
   useLayoutEffect(() => {
     let frame = window.requestAnimationFrame(measureCollapsedRow);
@@ -91,8 +103,8 @@ export function TagList({
     };
   }, [measureCollapsedRow]);
 
-  function renderChip(item: string, index: number) {
-    const isExtra = shouldShowToggle && index >= visibleLimit;
+  function renderChip(item: string, index: number, originalIndex: number) {
+    const isExtra = shouldShowToggle && originalIndex >= visibleLimit;
 
     return (
       <m.span
@@ -100,8 +112,8 @@ export function TagList({
         className={chipClassName}
         exit={{ opacity: 0, scale: 0.98, y: 2 }}
         initial={isExtra ? { opacity: 0, scale: 0.97, y: 5 } : false}
-        key={`${item}-${index}`}
-        transition={{ delay: isExtra ? Math.min((index - visibleLimit) * 0.035, 0.18) : 0, duration: 0.18 }}
+        key={`${item}-${originalIndex}`}
+        transition={{ delay: isExtra ? Math.min(Math.max(index - visibleLimit, 0) * 0.035, 0.18) : 0, duration: 0.18 }}
       >
         {item}
       </m.span>
@@ -111,15 +123,15 @@ export function TagList({
   return (
     <div
       className={cn("tag-list relative flex items-center gap-2", shouldShowToggle && !expanded ? "flex-nowrap overflow-hidden" : "flex-wrap")}
-      id={listId}
+      id={controlledRegionId}
       ref={containerRef}
     >
       <AnimatePresence initial={false}>
-        {visibleItems.map((item, index) => renderChip(item, index))}
+        {visibleItems.map(({ item, originalIndex }, index) => renderChip(item, index, originalIndex))}
       </AnimatePresence>
       {shouldShowToggle ? (
         <button
-          aria-controls={listId}
+          aria-controls={controlledRegionId}
           aria-expanded={expanded}
           aria-label={expanded ? `Show fewer ${label}` : `Show ${hiddenCount} more ${label}`}
           className="tag-list__toggle shrink-0"
@@ -135,7 +147,7 @@ export function TagList({
           className="pointer-events-none fixed -left-[9999px] top-0 flex max-w-none items-center gap-2 opacity-0"
           ref={measureRef}
         >
-          {items.slice(0, visibleLimit).map((item, index) => (
+          {items.map((item, index) => (
             <span className={chipClassName} data-chip-measure key={`${item}-${index}-measure`}>
               {item}
             </span>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { LinkButton } from "@/components/ui/Button";
@@ -8,7 +10,7 @@ import { TagList } from "@/components/ui/TagList";
 import { caseStudies } from "@/data/case-studies";
 import { siteConfig } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/utils";
+import { canonicalUrl } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -31,6 +33,9 @@ export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const study = caseStudies.find((item) => item.slug === slug);
   if (!study) notFound();
+  const currentIndex = caseStudies.findIndex((item) => item.slug === study.slug);
+  const previousStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+  const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
 
   return (
     <>
@@ -40,7 +45,7 @@ export default async function CaseStudyPage({ params }: Props) {
           "@type": "Article",
           headline: study.title,
           description: study.summary,
-          url: absoluteUrl(siteConfig.siteUrl, `/work/${study.slug}`)
+          url: canonicalUrl(siteConfig.siteUrl, `/work/${study.slug}`)
         }}
       />
       <Breadcrumbs items={[{ label: "Work", href: "/work" }, { label: study.title }]} />
@@ -51,9 +56,25 @@ export default async function CaseStudyPage({ params }: Props) {
             {study.title}
           </h1>
           <p className="mt-6 text-xl leading-8 text-muted">{study.summary}</p>
+          <div className="mt-8 grid gap-3 rounded-[1.25rem] border border-border bg-elevated p-4 sm:grid-cols-3">
+            <SummaryItem label="Format" value="Anonymized workflow" />
+            <SummaryItem label="Focus" value={study.skills.slice(0, 2).join(" + ")} />
+            <SummaryItem label="Tools" value={study.tools.slice(0, 2).join(" + ")} />
+          </div>
           <div className="surface-card mt-8 rounded-[1.25rem] p-6">
             <h2 className="font-serif text-3xl font-semibold text-ink">Hiring Context</h2>
             <p className="mt-3 text-muted">{study.context}</p>
+          </div>
+          <div className="mt-8 rounded-[1.25rem] border border-border bg-elevated p-5">
+            <h2 className="font-serif text-3xl font-semibold text-ink">Process Snapshot</h2>
+            <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {study.sections.slice(0, 4).map((section, index) => (
+                <li className="rounded-2xl border border-border bg-surface p-4" key={section.title}>
+                  <span className="text-sm font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
+                  <p className="mt-2 font-semibold leading-snug text-ink">{section.title}</p>
+                </li>
+              ))}
+            </ol>
           </div>
           <div className="mt-8 grid gap-5">
             {study.sections.map((section, index) => (
@@ -97,8 +118,68 @@ export default async function CaseStudyPage({ params }: Props) {
               Discuss a professional opportunity
             </a>
           </div>
+          <nav
+            aria-label="Related work navigation"
+            className="mt-8 grid gap-4 border-t border-border pt-8 md:grid-cols-2"
+          >
+            {previousStudy ? (
+              <RelatedWorkLink
+                direction="Previous"
+                href={`/work/${previousStudy.slug}`}
+                icon={<ArrowLeft className="size-4" aria-hidden />}
+                title={previousStudy.title}
+              />
+            ) : (
+              <div />
+            )}
+            {nextStudy ? (
+              <RelatedWorkLink
+                direction="Next"
+                href={`/work/${nextStudy.slug}`}
+                icon={<ArrowRight className="size-4" aria-hidden />}
+                title={nextStudy.title}
+              />
+            ) : null}
+          </nav>
         </article>
       </Section>
     </>
+  );
+}
+
+function SummaryItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent">{label}</p>
+      <p className="mt-1 font-semibold leading-snug text-ink">{value}</p>
+    </div>
+  );
+}
+
+function RelatedWorkLink({
+  direction,
+  href,
+  icon,
+  title
+}: {
+  direction: "Previous" | "Next";
+  href: string;
+  icon: ReactNode;
+  title: string;
+}) {
+  return (
+    <a
+      className="surface-card flex min-h-24 items-center gap-3 rounded-[1.25rem] p-5 font-semibold text-ink hover:text-accent"
+      href={href}
+    >
+      {direction === "Previous" ? icon : null}
+      <span className={direction === "Next" ? "ml-auto text-right" : undefined}>
+        <span className="block text-xs font-bold uppercase tracking-[0.14em] text-accent">
+          {direction} workflow
+        </span>
+        <span className="mt-1 block">{title}</span>
+      </span>
+      {direction === "Next" ? icon : null}
+    </a>
   );
 }

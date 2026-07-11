@@ -263,16 +263,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/88 backdrop-blur-xl">
-      <div className="container-shell flex min-h-20 items-center justify-between gap-5">
-        <a className="flex items-center gap-3 focus-visible:outline-none" href="/">
-          <span className="grid size-11 place-items-center rounded-full border border-strong bg-surface text-accent">
-            <BriefcaseBusiness className="size-5" aria-hidden />
+      <div className="container-shell header-shell flex min-h-20 items-center justify-between gap-3 min-[1180px]:gap-5">
+        <a className="header-brand flex min-w-0 items-center gap-2 focus-visible:outline-none sm:gap-3" href="/">
+          <span className="header-brand__mark grid size-10 shrink-0 place-items-center rounded-full border border-strong bg-surface text-accent sm:size-11">
+            <BriefcaseBusiness className="size-4 sm:size-5" aria-hidden />
           </span>
           <span className="min-w-0">
-            <span className="block truncate font-serif text-xl font-semibold leading-tight text-ink">
+            <span className="header-brand__name block truncate font-serif text-lg font-semibold leading-tight text-ink sm:text-xl">
               {profile.fullName}
             </span>
-            <span className="block truncate text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+            <span className="header-brand__subtitle block truncate text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-muted sm:text-xs sm:tracking-[0.12em]">
               Human Resources
             </span>
           </span>
@@ -304,13 +304,13 @@ export function Header() {
           </LinkButton>
         </div>
 
-        <div className="flex items-center gap-2 min-[1180px]:hidden">
+        <div className="mobile-header-actions flex shrink-0 items-center gap-1.5 min-[1180px]:hidden sm:gap-2">
           {!open ? <ThemeToggle compact /> : null}
           <button
             aria-controls="mobile-navigation"
             aria-expanded={open}
             aria-label={open ? "Navigation menu open" : "Open navigation menu"}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border bg-surface text-ink transition hover:border-strong hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink transition hover:border-strong hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:size-11"
             onClick={() => setOpen((value) => !value)}
             ref={menuButtonRef}
             type="button"

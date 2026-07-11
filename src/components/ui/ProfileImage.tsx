@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import * as m from "motion/react-m";
 import { useState } from "react";
 import { AnimatedPortraitFrame } from "@/components/profile/AnimatedPortraitFrame";
@@ -33,16 +32,27 @@ export function ProfileImage({
       transition={{ duration: 0.5 }}
     >
       {hasImage ? (
-        <Image
-          alt="Vaishnavi Jaiswal, Human Resources Executive"
-          className="relative z-10 h-full w-full object-cover object-center"
-          height={dimensions.height}
-          onError={() => setHasImage(false)}
-          priority={priority}
-          sizes={size === "large" ? "(min-width: 1024px) 360px, (min-width: 768px) 260px, 92vw" : "128px"}
-          src={profile.profileImage}
-          width={dimensions.width}
-        />
+        <picture className="relative z-10 block h-full w-full">
+          {profile.profileImageSrcSet ? (
+            <source
+              sizes={size === "large" ? "(min-width: 1024px) 360px, (min-width: 768px) 260px, 92vw" : "128px"}
+              srcSet={profile.profileImageSrcSet}
+              type="image/webp"
+            />
+          ) : null}
+          <img
+            alt="Vaishnavi Jaiswal, Human Resources Executive"
+            className="h-full w-full object-cover object-center"
+            decoding="async"
+            fetchPriority={priority ? "high" : "auto"}
+            height={dimensions.height}
+            loading={priority ? "eager" : "lazy"}
+            onError={() => setHasImage(false)}
+            sizes={size === "large" ? "(min-width: 1024px) 360px, (min-width: 768px) 260px, 92vw" : "128px"}
+            src={profile.profileImage}
+            width={dimensions.width}
+          />
+        </picture>
       ) : null}
       <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_top_left,rgb(var(--color-sage)/0.22),transparent_42%),linear-gradient(135deg,rgb(var(--color-surface)),rgb(var(--color-elevated)))]">
         <span className="font-serif text-6xl font-semibold text-accent">{profile.initials}</span>

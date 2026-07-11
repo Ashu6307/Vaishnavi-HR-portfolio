@@ -31,7 +31,7 @@ The production static output is generated in `out/`.
 
 ## Development QA
 
-The branded loader appears on every full document load and hard refresh for at least one second. In development, append `?showLoader=1` to a URL when you want an explicit loader QA URL, for example:
+The branded loader appears on the first full document load and on hard refresh for a short professional interval of about 600ms, with an 1100ms safety timeout and quick exit fade. It does not replay during same-tab internal navigation. In development, append `?showLoader=1` to a URL when you want an explicit loader QA URL, for example:
 
 ```bash
 http://localhost:3000/?showLoader=1

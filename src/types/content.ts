@@ -28,6 +28,8 @@ export interface Profile {
   careerDirection: string;
   location: string;
   profileImage: string;
+  profileImageWebp?: string;
+  profileImageSrcSet?: string;
   profileImageAvailable: boolean;
   aboutImage?: string;
   focusAreas: string[];

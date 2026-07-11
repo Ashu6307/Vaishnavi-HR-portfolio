@@ -10,9 +10,10 @@ export const metadata = pageMetadata(
 
 const expertiseAreas = [
   {
+    category: "Hiring cycle",
     title: "End-to-End Non-IT Recruitment",
     meaning:
-      "Supporting hiring from manpower requirement understanding through sourcing, screening, interview coordination, selection support, and joining follow-up.",
+      "Managing hiring steps from manpower requirement understanding through sourcing, screening, interviews, selection updates, and joining follow-up.",
     approach:
       "Start with role clarity, keep the candidate pipeline organized, and maintain timely communication with hiring stakeholders.",
     activities:
@@ -21,9 +22,10 @@ const expertiseAreas = [
     experience: "Applied across PCI Infraprojects and APTO Management Services responsibilities."
   },
   {
+    category: "Sourcing",
     title: "Candidate Sourcing and Market Mapping",
     meaning:
-      "Identifying relevant Non-IT candidate profiles through structured search, role mapping, referral channels, and candidate databases.",
+      "Identifying relevant Non-IT profiles through search, role mapping, referral channels, and candidate databases.",
     approach:
       "Use clear search keywords, compare profiles against role expectations, and separate active prospects from future pipeline profiles.",
     activities:
@@ -32,6 +34,7 @@ const expertiseAreas = [
     experience: "Connected to APTO Talent Acquisition Specialist and Recruitment Researcher roles."
   },
   {
+    category: "Screening",
     title: "Candidate Screening and Shortlisting",
     meaning:
       "Reviewing profiles against role requirements before moving candidates into interviews or stakeholder review.",
@@ -43,9 +46,10 @@ const expertiseAreas = [
     experience: "Used across recruitment, campus hiring, and candidate pipeline support work."
   },
   {
+    category: "Interview operations",
     title: "Interview and Hiring Coordination",
     meaning:
-      "Keeping interviews, hiring-manager communication, candidate follow-up, and stakeholder updates moving in a structured way.",
+      "Keeping interviews, hiring-manager communication, candidate follow-up, and stakeholder updates moving with clear ownership.",
     approach:
       "Confirm availability early, communicate clearly, track interview status, and reduce avoidable coordination gaps.",
     activities:
@@ -54,9 +58,10 @@ const expertiseAreas = [
     experience: "Relevant to PCI, APTO, and CINCOONI Systems recruitment coordination work."
   },
   {
+    category: "Stakeholders",
     title: "Client and Stakeholder Coordination",
     meaning:
-      "Understanding hiring requirements, sharing recruitment updates, and supporting professional communication with internal or external stakeholders.",
+      "Understanding hiring requirements, sharing updates, and maintaining professional communication with internal or external stakeholders.",
     approach:
       "Clarify expectations, keep updates factual, and align recruitment activity with the requirement rather than overpromising outcomes.",
     activities:
@@ -65,9 +70,10 @@ const expertiseAreas = [
     experience: "Supported through APTO Account Manager - Talent Acquisition responsibilities."
   },
   {
+    category: "Records",
     title: "Recruitment Documentation",
     meaning:
-      "Maintaining accurate recruitment records and coordinating offer-related and joining-related documentation.",
+      "Maintaining accurate hiring records and managing offer-related and joining-related documents.",
     approach:
       "Keep document status visible, follow up on pending items, and avoid gaps between selection, offer, and joining stages.",
     activities:
@@ -76,6 +82,7 @@ const expertiseAreas = [
     experience: "Part of PCI Infraprojects HR Executive responsibilities."
   },
   {
+    category: "Onboarding",
     title: "Employee Onboarding and Induction Support",
     meaning:
       "Helping new employees move from joining documentation into orientation, induction, and early employee integration.",
@@ -87,6 +94,7 @@ const expertiseAreas = [
     experience: "Connected to PCI Infraprojects onboarding and HR operations work."
   },
   {
+    category: "Onboarding",
     title: "Background Verification Coordination",
     meaning:
       "Coordinating background-verification steps and documentation follow-up as part of the joining and onboarding process.",
@@ -98,6 +106,7 @@ const expertiseAreas = [
     experience: "Handled as part of HR Executive responsibilities at PCI Infraprojects."
   },
   {
+    category: "Tracking",
     title: "Recruitment Tracking and Candidate Databases",
     meaning:
       "Keeping candidate, requirement, interview, offer, and joining status visible for recruitment follow-up.",
@@ -109,6 +118,7 @@ const expertiseAreas = [
     experience: "Used across recruitment research, sourcing, and HR operations responsibilities."
   },
   {
+    category: "Campus hiring",
     title: "Campus Recruitment Coordination",
     meaning:
       "Supporting campus hiring activity through candidate interviews, scheduling, evaluation records, and candidate progress tracking.",
@@ -130,17 +140,28 @@ export default function ExpertisePage() {
           eyebrow="Expertise"
           level="h1"
           title="Practical HR expertise across recruitment coordination and onboarding support."
-          intro="Focused capabilities across Talent Acquisition, Non-IT recruitment, candidate communication, documentation, onboarding, and HR operations support."
+          intro="Focused capabilities across Talent Acquisition, Non-IT hiring, candidate communication, records, onboarding, and HR operations."
         />
+        <div className="mb-6 flex flex-wrap gap-2">
+          {["Hiring cycle", "Sourcing", "Screening", "Onboarding", "Tracking"].map((item) => (
+            <span
+              className="rounded-full border border-strong bg-elevated px-4 py-2 text-sm font-bold text-ink"
+              key={item}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
         <div className="grid gap-5 md:grid-cols-2">
           {expertiseAreas.map((area) => (
             <article className="surface-card rounded-[1.25rem] p-6" key={area.title}>
+              <p className="label-text mb-3">{area.category}</p>
               <h2 className="font-serif text-3xl font-semibold text-ink">{area.title}</h2>
               <div className="mt-5 grid gap-4">
-                <Block title="What it involves" text={area.meaning} />
-                <Block title="Professional approach" text={area.approach} />
-                <Block title="Typical activities" text={area.activities} />
-                <Block title="Tools and channels" text={area.tools.join(", ")} />
+                <Block title="Scope" text={area.meaning} />
+                <Block title="Approach" text={area.approach} />
+                <Block title="Typical work" text={area.activities} />
+                <Block title="Tools" text={area.tools.join(", ")} />
                 <Block title="Related experience" text={area.experience} />
               </div>
             </article>
