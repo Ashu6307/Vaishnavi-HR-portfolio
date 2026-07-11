@@ -1,27 +1,33 @@
 "use client";
 
 import * as m from "motion/react-m";
-import { useEffect, useState } from "react";
-import { loaderContainer, loaderItem } from "@/lib/motion";
+import { useLayoutEffect, useState } from "react";
+import { motionEase } from "@/lib/motion";
 
-const SESSION_KEY = "vj-loader-shown";
-const MIN_DURATION = 600;
-const MAX_DURATION = 1100;
-const EXIT_DURATION = 120;
+const MIN_DURATION = 800;
+const MAX_DURATION = 1300;
+const EXIT_DURATION = 220;
+const SESSION_KEY = "vj-loader-has-shown";
 
 export function AppLoader() {
   const [phase, setPhase] = useState<"visible" | "exiting" | "hidden">("visible");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const body = document.body;
     const html = document.documentElement;
     const navigationEntry = performance.getEntriesByType("navigation")[0] as
       | PerformanceNavigationTiming
       | undefined;
     const navigationType = navigationEntry?.type;
-    const alreadyShown = sessionStorage.getItem(SESSION_KEY) === "true";
+    const forceLoader = new URLSearchParams(window.location.search).get("showLoader") === "1";
+    const sameOriginReferrer = document.referrer ? new URL(document.referrer).origin === window.location.origin : false;
+    const internalDocumentNavigation =
+      !forceLoader &&
+      navigationType === "navigate" &&
+      sameOriginReferrer &&
+      sessionStorage.getItem(SESSION_KEY) === "true";
 
-    if (alreadyShown && navigationType !== "reload") {
+    if (internalDocumentNavigation) {
       body.classList.remove("app-loading");
       body.classList.add("app-ready");
       html.classList.add("app-ready");
@@ -29,7 +35,9 @@ export function AppLoader() {
       return () => window.cancelAnimationFrame(skipFrame);
     }
 
-    const loaderStart = performance.now();
+    const recordedStart = Number(document.documentElement.dataset.loaderStart);
+    const loaderStart = Number.isFinite(recordedStart) && recordedStart > 0 ? recordedStart : performance.now();
+    const elapsedSinceStart = () => performance.now() - loaderStart;
     let ready = document.readyState === "interactive" || document.readyState === "complete";
     let minElapsed = false;
     let settled = false;
@@ -40,10 +48,10 @@ export function AppLoader() {
     const hide = () => {
       if (settled) return;
       settled = true;
-      sessionStorage.setItem(SESSION_KEY, "true");
       body.classList.remove("app-loading");
       body.classList.add("app-ready");
       html.classList.add("app-ready");
+      sessionStorage.setItem(SESSION_KEY, "true");
       setPhase("exiting");
       exitTimer = setTimeout(() => setPhase("hidden"), EXIT_DURATION);
     };
@@ -58,6 +66,7 @@ export function AppLoader() {
     };
 
     body.classList.add("app-loading");
+    body.classList.remove("app-ready");
 
     if (!ready) {
       window.addEventListener("load", onReady, { once: true });
@@ -66,13 +75,13 @@ export function AppLoader() {
     minTimer = setTimeout(() => {
       minElapsed = true;
       maybeHide();
-    }, Math.max(MIN_DURATION - (performance.now() - loaderStart), 0));
+    }, Math.max(MIN_DURATION - elapsedSinceStart(), 0));
 
     maxTimer = setTimeout(() => {
       ready = true;
       minElapsed = true;
       hide();
-    }, MAX_DURATION);
+    }, Math.max(MAX_DURATION - elapsedSinceStart(), 0));
 
     return () => {
       if (minTimer) clearTimeout(minTimer);
@@ -87,27 +96,20 @@ export function AppLoader() {
 
   return (
     <m.div
-      animate={phase === "exiting" ? "exit" : "visible"}
+      animate={phase === "exiting" ? { opacity: 0 } : { opacity: 1 }}
       aria-live="polite"
       className="app-loader"
-      initial="hidden"
+      initial={{ opacity: 1 }}
       role="status"
-      transition={{ duration: 0.22 }}
-      variants={loaderContainer}
+      transition={{ duration: phase === "exiting" ? EXIT_DURATION / 1000 : 0.18, ease: motionEase }}
     >
-      <m.div className="app-loader__mark" transition={{ duration: 0.42 }} variants={loaderItem} aria-hidden="true">
-        VJ
-      </m.div>
-      <m.p className="app-loader__label" transition={{ delay: 0.08, duration: 0.32 }} variants={loaderContainer}>
-        Human Resources
-      </m.p>
-      <m.div
-        aria-hidden="true"
-        className="app-loader__line"
-        initial={{ opacity: 0, scaleX: 0 }}
-        animate={{ opacity: 1, scaleX: 1 }}
-        transition={{ delay: 0.18, duration: 0.5 }}
-      />
+      <div className="app-loader__panel">
+        <div className="app-loader__mark" aria-hidden="true">
+          <span className="app-loader__monogram">VJ</span>
+        </div>
+        <p className="app-loader__label">Human Resources</p>
+        <div aria-hidden="true" className="app-loader__line" />
+      </div>
       <span className="sr-only">Loading portfolio</span>
     </m.div>
   );

@@ -40,9 +40,9 @@ export function ExperienceCard({ experience, compact = false }: { experience: Co
       {experience.roleProgression ? (
         <div className="mt-7">
           <p className="text-sm font-bold uppercase tracking-[0.11em] text-accent">Internal Role Progression</p>
-          <MotionTimeline className="mt-5 grid gap-5 pl-5">
+          <MotionTimeline className="role-timeline mt-5 grid gap-5">
             {experience.roleProgression.map((role) => (
-              <MotionStaggerItem key={`${role.designation}-${role.dateRange}`}>
+              <MotionStaggerItem className="role-timeline__item" key={`${role.designation}-${role.dateRange}`}>
                 <RoleCard compact={compact} role={role} visibleSkillLimit={visibleSkillLimit} />
               </MotionStaggerItem>
             ))}
@@ -74,23 +74,24 @@ function RoleCard({
   visibleSkillLimit: number;
 }) {
   return (
-    <article className="relative min-w-0 max-w-full pb-1">
-      <span
-        className="absolute -left-[1.7rem] top-1.5 size-3 rounded-full border border-accent bg-surface"
-        aria-hidden
-      />
-      <div className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
-        <h4 className="font-serif text-[1.4rem] font-semibold leading-tight text-ink">{role.designation}</h4>
-        <span className="text-sm font-bold text-accent">{role.dateRange}</span>
-      </div>
-      {role.summary ? <p className="mt-3 text-muted">{role.summary}</p> : null}
-      <div className="mt-4">
-        <Accordion title="Responsibilities" defaultOpen={!compact}>
-          <ResponsibilityList items={role.responsibilities} />
-        </Accordion>
-      </div>
-      <div className="mt-4">
-        <TagList items={role.competencies} limit={visibleSkillLimit} />
+    <article className="role-card grid min-w-0 max-w-full grid-cols-[24px_minmax(0,1fr)] gap-x-5 pb-1">
+      <span className="role-timeline__marker mt-2" aria-hidden />
+      <div className="min-w-0">
+        <div className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:gap-4">
+          <h4 className="text-balance font-serif text-[1.4rem] font-semibold leading-tight text-ink">
+            {role.designation}
+          </h4>
+          <span className="role-date text-sm font-bold text-accent">{role.dateRange}</span>
+        </div>
+        {role.summary ? <p className="mt-3 text-muted">{role.summary}</p> : null}
+        <div className="mt-4">
+          <Accordion title="Responsibilities" defaultOpen={!compact}>
+            <ResponsibilityList items={role.responsibilities} />
+          </Accordion>
+        </div>
+        <div className="mt-4">
+          <TagList items={role.competencies} limit={visibleSkillLimit} />
+        </div>
       </div>
     </article>
   );

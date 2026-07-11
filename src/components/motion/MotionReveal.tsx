@@ -101,7 +101,7 @@ export function MotionTimeline({
     >
       <m.span
         aria-hidden
-        className="absolute bottom-0 left-0 top-0 w-px bg-strong"
+        className="motion-timeline__line absolute bottom-0 left-0 top-0 w-px bg-strong"
         initial={{ scaleY: 0 }}
         style={{ transformOrigin: "top" }}
         transition={{ duration: 0.72 }}

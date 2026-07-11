@@ -1,6 +1,7 @@
 export function ThemeScript() {
   const code = `
     try {
+      document.documentElement.dataset.loaderStart = String(performance.now());
       document.documentElement.classList.add("js");
       var stored = localStorage.getItem("vj-theme");
       var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;

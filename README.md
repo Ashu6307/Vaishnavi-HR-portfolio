@@ -31,13 +31,7 @@ The production static output is generated in `out/`.
 
 ## Development QA
 
-The branded loader appears on the first full document load and on hard refresh for a short professional interval of about 600ms, with an 1100ms safety timeout and quick exit fade. It does not replay during same-tab internal navigation. In development, append `?showLoader=1` to a URL when you want an explicit loader QA URL, for example:
-
-```bash
-http://localhost:3000/?showLoader=1
-```
-
-This does not add a visible debug UI and does not replay the loader during normal client-side navigation.
+The branded loader appears on full document loads, direct URL entries, new tabs, and hard refreshes for at least 800ms, with a 1300ms safety timeout and smooth exit fade. It does not replay during same-tab internal navigation, theme changes, menu interactions, accordions, tag expansion, or back-to-top clicks. For visual QA, append `?showLoader=1` to force the loader on a same-origin test navigation without adding visible debug UI.
 
 ## Static Architecture
 

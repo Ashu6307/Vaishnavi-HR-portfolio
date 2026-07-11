@@ -81,8 +81,8 @@ export default async function CaseStudyPage({ params }: Props) {
       <Section>
         <article className="mx-auto max-w-4xl">
           <p className="label-text">Anonymized HR Workflow</p>
-          <h1 className="mt-4 font-serif text-5xl font-semibold leading-tight text-ink md:text-6xl">
-            {study.title}
+          <h1 className="mt-4 text-balance font-serif text-5xl font-semibold leading-[1.02] text-ink md:text-6xl">
+            <RecruitmentTitle text={study.title} />
           </h1>
           <p className="mt-6 text-xl leading-8 text-muted">{study.summary}</p>
           <div className="mt-8 grid gap-3 rounded-[1.25rem] border border-border bg-elevated p-4 sm:grid-cols-3">
@@ -100,7 +100,7 @@ export default async function CaseStudyPage({ params }: Props) {
               {snapshotLabels.map((label, index) => (
                 <li className="rounded-2xl border border-border bg-surface p-4" key={label}>
                   <span className="text-sm font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
-                  <p className="mt-2 font-semibold leading-snug text-ink">{label}</p>
+                  <p className="mt-2 text-balance font-semibold leading-snug text-ink">{label}</p>
                 </li>
               ))}
             </ol>
@@ -109,7 +109,9 @@ export default async function CaseStudyPage({ params }: Props) {
             {study.sections.map((section, index) => (
               <section className="surface-card rounded-[1.25rem] p-6" key={section.title}>
                 <p className="text-sm font-bold text-accent">{String(index + 1).padStart(2, "0")}</p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">{section.title}</h2>
+                <h2 className="mt-2 text-balance font-serif text-3xl font-semibold leading-tight text-ink">
+                  {section.title}
+                </h2>
                 <ul className="mt-4 grid gap-3 text-muted">
                   {section.items.map((item) => (
                     <li className="flex gap-3" key={item}>
@@ -210,5 +212,17 @@ function RelatedWorkLink({
       </span>
       {direction === "Next" ? icon : null}
     </a>
+  );
+}
+
+function RecruitmentTitle({ text }: { text: string }) {
+  return text.split(/(End-to-End|Non-IT)/g).map((part, index) =>
+    part === "End-to-End" || part === "Non-IT" ? (
+      <span className="whitespace-nowrap" key={`${part}-${index}`}>
+        {part}
+      </span>
+    ) : (
+      part
+    )
   );
 }
